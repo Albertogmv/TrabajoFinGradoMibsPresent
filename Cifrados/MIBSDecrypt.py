@@ -140,8 +140,8 @@ def MIBSdecr(tamañoclave,key,dataBlock):
         left[ronda]=temp
 
     cipherText=left[ronda]+right[ronda]
-    cipherText=hex(int(cipherText,2))
-    return cipherText[2:]
+    cipherText=hex(int(cipherText,2))[2:]
+    return cipherText
 
 print(MIBSdecr(80,"ffffffffffffffff","72ecac2a66ff2059"))
 print("Deberia salir: ffffffffffffffff")        
