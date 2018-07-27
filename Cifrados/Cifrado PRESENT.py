@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from text_binary import text_to_bits,text_from_bits
 from BitsFunctions1 import addZerosBloqueDatos,addZeros
-from Present2 import PRESENT
+from Present1 import PRESENT
 import codecs
 
 #Recibe un texto de entrada y devuelve diccionario de bloques de 64 bits(el último 

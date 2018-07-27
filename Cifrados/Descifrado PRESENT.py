@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from text_binary import text_to_bits,text_from_bits
 from BitsFunctions1 import addZerosBloqueDatos,addZeros
-from Present2 import PRESENT
 from PresentDecrypt1 import PRESENTDecr
 import codecs
 
