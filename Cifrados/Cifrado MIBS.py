@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from text_binary import text_to_bits,text_from_bits
 from BitsFunctions1 import addZerosBloqueDatos,addZeros
-from Present1 import PRESENT
+from MIBS import MIBS
 import codecs
 
 #Recibe un texto de entrada y devuelve diccionario de bloques de 64 bits(el último 
@@ -28,17 +28,17 @@ def bloqueDatos(text):
 
 def cifrado(tamañoclave,key,texto):
     key="0b"+text_to_bits(key)
-    if((tamañoclave==80 and (len(key)-2)>80) or (tamañoclave==128 and (len(key)-2)>128)):
+    if((tamañoclave==64 and (len(key)-2)>64) or (tamañoclave==80 and (len(key)-2)>80)):
         resultado="Error: la clave supera los "+str(tamañoclave)+" bits."
     else:
         datos=bloqueDatos(texto)
-        print(datos)
         texto_cifrado=""
         for i in datos:
-            cifrabloque=PRESENT(tamañoclave,key,datos[i])
+            cifrabloque=MIBS(tamañoclave,key,datos[i])
             texto_cifrado=texto_cifrado+cifrabloque
+            print(texto_cifrado)
         resultado=texto_cifrado
     return resultado
          
          
-print(cifrado(128,"aeiouaeiou","Esto es un cifrado PRESENT y, funciona a la perfección"))
+print(cifrado(80,"hfjhf","Hola mi nombre es Alberto y esto es un cifrado MIBS"))

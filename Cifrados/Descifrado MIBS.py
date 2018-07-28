@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from text_binary import text_to_bits,text_from_bits
 from BitsFunctions1 import addZerosBloqueDatos,addZeros
-from PresentDecrypt1 import PRESENTDecr
+from MIBSDecrypt import MIBSdecr
 import codecs
 
 #Recibe un texto de entrada y devuelve diccionario de bloques de 64 bits(el último 
@@ -22,21 +22,22 @@ def bloqueCifrados(cifrado):
 
 def descifrado(tamañoclave,key,cifrado):
     if(key==""):
-        key="0b"
+        key="0"
     else:
         key="0b"+text_to_bits(key)
-    if((tamañoclave==80 and (len(key)-2)>80) or (tamañoclave==128 and (len(key)-2)>128)):
-        resultado_texto="Error: la clave supera los "+str(tamañoclave)+" bits."
+    if((tamañoclave==64 and (len(key)-2)>64) or (tamañoclave==80 and (len(key)-2)>80)):
+        resultado="Error: la clave supera los "+str(tamañoclave)+" bits."
     else:
         datos=bloqueCifrados(cifrado)
         print(datos)
         texto_descifrado=""
         for i in datos:
-            descifrabloque=PRESENTDecr(tamañoclave,key,datos[i])
+            print(datos[i])
+            descifrabloque=MIBSdecr(tamañoclave,key,datos[i])
             texto_descifrado=texto_descifrado+text_from_bits(descifrabloque)
             print(texto_descifrado)
-        resultado_texto=texto_descifrado
-    return resultado_texto
+        resultado=texto_descifrado
+    return resultado
       
 
-print(descifrado(128,"aeiouaeiou","167870c07847f9e199ea48344d348d2775bd68e376caea347db8e71988875e5b5dee4503d59cd775ecd39c8327fa17d746164ee8f4df734e"))
+print(descifrado(80,"hfjhf","51e4761dea38ca66c376e495b645c6de4250eb44775f6ecd47792324b3a41e22c6c12d78539b57a854e12bb7969d3cbf870b712896ac10d1"))
