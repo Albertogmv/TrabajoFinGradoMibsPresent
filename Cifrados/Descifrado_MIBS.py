@@ -40,4 +40,4 @@ def descifrado(tamañoclave,key,cifrado):
     return resultado
       
 
-print(descifrado(80,"hfjhf","51e4761dea38ca66c376e495b645c6de4250eb44775f6ecd47792324b3a41e22c6c12d78539b57a854e12bb7969d3cbf870b712896ac10d1"))
+#print(descifrado(80,"hfjhf","51e4761dea38ca66c376e495b645c6de4250eb44775f6ecd47792324b3a41e22c6c12d78539b57a854e12bb7969d3cbf870b712896ac10d1"))
