@@ -15,12 +15,16 @@ def generaterondaKeys(userKey):
     subkeys=list()
     for ronda in range(1,33):
         state=rotationRight(state,15)
+        print("Rotación: "+state, len(state))
         state=Sbox(state[-64:-60],4)+state[-60:]
+        print("SBOx: "+state)
         rondaCounter=addZeros(bin(ronda),5)
         #print(rondaCounter)
         xor=int(state[-16:-11],2)^int(rondaCounter,2)
         state=state[-64:-16]+addZeros(bin(xor),5)+state[-11:]
+        print("XOR: "+state)
         rondaKey=state[-64:-32]
+        print("claveRonda"+rondaKey)
         subkeys.append(rondaKey)
     #print(subkeys,len(subkeys))
     return subkeys

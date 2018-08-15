@@ -36,9 +36,9 @@ def cifrado(tamañoclave,key,texto):
         for i in datos:
             cifrabloque=MIBS(tamañoclave,key,datos[i])
             texto_cifrado=texto_cifrado+cifrabloque
-            print(texto_cifrado)
+            #print(texto_cifrado)
         resultado=texto_cifrado
     return resultado
          
          
-print(cifrado(80,"hfjhf","Hola mi nombre es Alberto y esto es un cifrado MIBS"))
+#print(cifrado(64,"cifrMIBS","Hola mi nombre es Alberto y esto es un cifrado MIBS"))
