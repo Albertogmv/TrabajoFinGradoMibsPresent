@@ -6,7 +6,7 @@ import codecs
 
 #Recibe un texto de entrada y devuelve diccionario de bloques de 64 bits(el último 
 #se rellena con ceros al principio si fuera necesario)
-def bloqueDatos(text):
+def bloqueDatosPRESENT(text):
     bloqueDatos = text_to_bits(text)
     bloques=dict()
     if(len(bloqueDatos)<=64):
@@ -26,12 +26,12 @@ def bloqueDatos(text):
         bloques[len(bloques)]=addZerosBloqueDatos(bloque)
     return bloques
 
-def cifrado(tamañoclave,key,texto):
+def cifradoPRESENT(tamañoclave,key,texto):
     key="0b"+text_to_bits(key)
     if((tamañoclave==80 and (len(key)-2)>80) or (tamañoclave==128 and (len(key)-2)>128)):
         resultado="Error: la clave supera los "+str(tamañoclave)+" bits."
     else:
-        datos=bloqueDatos(texto)
+        datos=bloqueDatosPRESENT(texto)
         print(datos)
         texto_cifrado=""
         for i in datos:
@@ -41,4 +41,4 @@ def cifrado(tamañoclave,key,texto):
     return resultado
          
          
-print(cifrado(128,"aeiouaeiou","Esto es un cifrado PRESENT y, funciona a la perfección"))
+#print(cifradoPRESENT(128,"aeiouaeiou","Esto es un cifrado PRESENT y, funciona a la perfección"))

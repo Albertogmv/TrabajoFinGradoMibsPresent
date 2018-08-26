@@ -6,7 +6,7 @@ import codecs
 
 #Recibe un texto de entrada y devuelve diccionario de bloques de 64 bits(el último 
 #se rellena con ceros al principio si fuera necesario)
-def bloqueCifrados(cifrado):
+def bloqueCifradosPRESENT(cifrado):
     bloques=dict()
     bloque=""
     cont=1
@@ -20,7 +20,7 @@ def bloqueCifrados(cifrado):
         cont=cont+1
     return bloques
 
-def descifrado(tamañoclave,key,cifrado):
+def descifradoPRESENT(tamañoclave,key,cifrado):
     if(key==""):
         key="0b"
     else:
@@ -28,7 +28,7 @@ def descifrado(tamañoclave,key,cifrado):
     if((tamañoclave==80 and (len(key)-2)>80) or (tamañoclave==128 and (len(key)-2)>128)):
         resultado_texto="Error: la clave supera los "+str(tamañoclave)+" bits."
     else:
-        datos=bloqueCifrados(cifrado)
+        datos=bloqueCifradosPRESENT(cifrado)
         print(datos)
         texto_descifrado=""
         for i in datos:
@@ -39,4 +39,4 @@ def descifrado(tamañoclave,key,cifrado):
     return resultado_texto
       
 
-print(descifrado(128,"aeiouaeiou","167870c07847f9e199ea48344d348d2775bd68e376caea347db8e71988875e5b5dee4503d59cd775ecd39c8327fa17d746164ee8f4df734e"))
+#print(descifradoPRESENT(128,"aeiouaeiou","167870c07847f9e199ea48344d348d2775bd68e376caea347db8e71988875e5b5dee4503d59cd775ecd39c8327fa17d746164ee8f4df734e"))

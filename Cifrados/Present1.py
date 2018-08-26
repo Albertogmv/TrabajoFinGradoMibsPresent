@@ -2,12 +2,12 @@
 from BitsFunctions1 import rotationLeft,addZeros
 
 #Programación de clave de 80 bit---> Genera subclaves de 64 bit
-def SBox(entrada,cant):#4 bits de entrada,cantidad de bits de salida
+def SBoxPRESENT(entrada,cant):#4 bits de entrada,cantidad de bits de salida
     entrada=int(entrada,2)
     s={0:12,1:5,2:6,3:11,4:9,5:0,6:10,7:13,8:3,9:14,10:15,11:8,12:4,13:7,14:1,15:2}
     return addZeros(bin(s[entrada]),cant)
 
-def PBox(i):#bit i es movido a la posición P(i)
+def PBoxPRESENT(i):#bit i es movido a la posición P(i)
     p={0:0,1:16,2:32,3:48,4:1,5:17,6:33,7:49,8:2,9:18,10:34,11:50,12:3,13:19,14:35,15:51,16:4,
        17:20,18:36,19:52,20:5,21:21,22:37,23:53,24:6,25:22,26:38,27:54,28:7,29:23,30:39,31:55,32:8,
        33:24,34:40,35:56,36:9,37:25,38:41,39:57,40:10,41:26,42:42,43:58,44:11,45:27,46:43,47:59,
@@ -23,7 +23,7 @@ def generateRoundKeys(userKey):#Entrada en binario userKey80-bit
         roundKey = registerKey[-80:-16]#K[79:16]
         keys.append(roundKey)
         registerKey = rotationLeft(registerKey,61)
-        sbox = SBox(registerKey[-80:-76],4)#S[k79..k76]
+        sbox = SBoxPRESENT(registerKey[-80:-76],4)#S[k79..k76]
         round=addZeros(bin(round),5)
         xor = int(registerKey[-20:-15],2)^int(round,2)#k19..k15 ^ round_counter
         xor = addZeros(bin(xor),5)
@@ -38,8 +38,8 @@ def generateRoundKeys2(userKey):#Entrada en binario userKey 128-bit
         roundKey = registerKey[-128:-64]#K[127:64]
         keys.append(roundKey)
         registerKey = rotationLeft(registerKey,61)
-        sbox1 = SBox(registerKey[-128:-124],4)#S[k127..k124]
-        sbox2 = SBox(registerKey[-124:-120],4)#S[k123..k120]
+        sbox1 = SBoxPRESENT(registerKey[-128:-124],4)#S[k127..k124]
+        sbox2 = SBoxPRESENT(registerKey[-124:-120],4)#S[k123..k120]
         round=addZeros(bin(round),5)
         xor = int(registerKey[-67:-62],2)^int(round,2)#k66..k62 ^ round_counter
         xor = addZeros(bin(xor),5)
@@ -71,7 +71,7 @@ def PRESENT(tamañoclave,key,dataBlock):#si la clave es 80-->80 bit, si es 128--
         for i in range(0,16):
             #le restamos 63, ya que state es una cadena y la posicion 0 en python comienza por la izquierda
             w=state[63-(4*i+3)]+state[63-(4*i+2)]+state[63-(4*i+1)]+state[63-(4*i)]
-            sbox=SBox(w,4)
+            sbox=SBoxPRESENT(w,4)
             trozos.insert(0,sbox)#w15...w0
         return "".join(trozos)
 
@@ -80,7 +80,7 @@ def PRESENT(tamañoclave,key,dataBlock):#si la clave es 80-->80 bit, si es 128--
         state=list(state)[::-1]
         nueval=state.copy()
         for i in range(0,len(state)):
-            nueval[PBox(i)]=state[i]
+            nueval[PBoxPRESENT(i)]=state[i]
         return "".join(nueval)[::-1]
 
 
