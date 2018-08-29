@@ -9,15 +9,16 @@ import codecs
 def bloqueCifrados(cifrado):
     bloques=dict()
     bloque=""
-    cont=1
+    #cont=1
     for e in cifrado:
         bloque=bloque + e
-        if(len(bloque)==16):
+        if(len(bloque)==64):
             bloques[len(bloques)]=bloque
-            if(cont!=len(cifrado)):
-                bloque=""
+            #if(cont!=len(cifrado)):
+            bloque=""
+        #cont=cont+1
 
-        cont=cont+1
+    print(bloques)
     return bloques
 
 def descifrado(tamañoclave,key,cifrado):
@@ -29,14 +30,11 @@ def descifrado(tamañoclave,key,cifrado):
         resultado="Error: la clave supera los "+str(tamañoclave)+" bits."
     else:
         datos=bloqueCifrados(cifrado)
-        print(datos)
         texto_descifrado=""
         for i in datos:
-            print(datos[i])
             descifrabloque=MIBSdecr(tamañoclave,key,datos[i])
-            texto_descifrado=texto_descifrado+text_from_bits(descifrabloque)
-            print(texto_descifrado)
-        resultado=texto_descifrado
+            texto_descifrado=texto_descifrado+descifrabloque
+        resultado=text_from_bits(texto_descifrado)
     return resultado
       
 

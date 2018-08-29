@@ -91,7 +91,7 @@ def PRESENT(tamañoclave,key,dataBlock):#si la clave es 80-->80 bit, si es 128--
         state=pLayer(state)
 
     cipherText=addRoundKey(state,subKeys[32-1])
-    return hex(int(cipherText,2))[2:]
+    return cipherText
 
 #print(PRESENT(80,"ffffffffffffffffffff","ffffffffffffffff"))
 

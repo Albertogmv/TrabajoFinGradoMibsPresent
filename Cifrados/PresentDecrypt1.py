@@ -64,8 +64,8 @@ def PRESENTDecr(tamañoclave,key,dataBlock):
         subKeys=generateRoundKeys2(key)
     else:
         return "Error, introduzca tamaño de clave válida"
-    dataBlock = bin(int(dataBlock, 16))
-    dataBlock=addZeros(dataBlock,64)
+    #dataBlock = bin(int(dataBlock, 16))
+    #dataBlock=addZeros(dataBlock,64)
 
     def pLayer(state):
         #dataBlock-->64 bits

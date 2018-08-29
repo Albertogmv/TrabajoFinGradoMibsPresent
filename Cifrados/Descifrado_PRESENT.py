@@ -12,7 +12,7 @@ def bloqueCifradosPRESENT(cifrado):
     cont=1
     for e in cifrado:
         bloque=bloque + e
-        if(len(bloque)==16):
+        if(len(bloque)==64):
             bloques[len(bloques)]=bloque
             if(cont!=len(cifrado)):
                 bloque=""
@@ -33,9 +33,9 @@ def descifradoPRESENT(tamañoclave,key,cifrado):
         texto_descifrado=""
         for i in datos:
             descifrabloque=PRESENTDecr(tamañoclave,key,datos[i])
-            texto_descifrado=texto_descifrado+text_from_bits(descifrabloque)
+            texto_descifrado=texto_descifrado+descifrabloque
             print(texto_descifrado)
-        resultado_texto=texto_descifrado
+        resultado_texto=text_from_bits(texto_descifrado)
     return resultado_texto
       
 

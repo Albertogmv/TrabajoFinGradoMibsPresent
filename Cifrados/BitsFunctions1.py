@@ -23,5 +23,5 @@ def addZerosBloqueDatos(binario):
     if(len(binario)<64):
         ceros=64-len(binario)
         for _ in range(0,ceros):
-            binario=binario + '0'
+            binario=binario + str(0)
     return binario

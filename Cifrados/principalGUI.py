@@ -215,11 +215,10 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     #Ver algoritmo cifrado MIBS
 
     def algoritmoMIBS(self):
-        self.ventanaProceso2=QtWidgets.QTabWidget()
+        self.ventanaProceso2=QtWidgets.QMainWindow()
         self.ui2=Ui_AlgoritmoMIBS()
         self.ui2.setupUi(self.ventanaProceso2)
         self.ventanaProceso2.show()
-        
         #Paso 0:Divide bloque inicial
         self.ui2.botondividir.clicked.connect(self.dividir)
         #Paso 1: Adición de clave:
@@ -387,7 +386,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui2.botonsiguienteronda.setEnabled(True)
 
     def nuevaRonda(self):
-        self.ventanaProceso2.setCurrentWidget(self.ui2.AlgoritmoMIBS1)
+        self.ui2.tabWidget.setCurrentWidget(self.ui2.AlgoritmoMIBS1)
         self.ui2.leftinicial.setText(self.ui2.lefti.text())
         self.ui2.rightinicial.setText(self.ui2.righti.text())
         self.ui2.ronda.stepUp()

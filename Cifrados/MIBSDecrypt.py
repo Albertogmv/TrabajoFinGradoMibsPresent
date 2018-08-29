@@ -108,9 +108,9 @@ def MIBSdecr(tamañoclave,key,dataBlock):
     else:
         return "Error, introduzca tamaño de clave válida"
    
-    state = dataBlock  
-    dataBlock = bin(int(dataBlock, 16))
-    dataBlock=addZeros(dataBlock,64)
+    #state = dataBlock  
+    #dataBlock = bin(int(dataBlock, 16))
+    #dataBlock=addZeros(dataBlock,64)
 
     split = int(len(dataBlock)/2)
     left = [None]*(32+1)

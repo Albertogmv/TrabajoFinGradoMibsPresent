@@ -1,27 +1,32 @@
 from BitsFunctions1 import addZeros,rotationRight
 
+#Creación S-Box MIBS
 def Sbox(entrada,cant):#4 bits de entrada,cant bits de salida
     entrada=int(entrada,2)
     s={0:4,1:15,2:3,3:8,4:13,5:10,6:12,7:0,8:11,9:5,10:7,11:14,12:2,13:6,14:1,15:9}
     return addZeros(bin(s[entrada]),cant)
 
+#Creación P-Box MIBS
 def Pbox(i):#trozo i es movido a la posición P(i)
     p=[1,7,0,2,5,6,3,4]
     return p[i]#posición a la que tiene que ser movido el trozo de posición i
     
+#Algoritmo de generación de rondas MIBS para clave de 64 bits    
 def generaterondaKeys(userKey):
-    registerKey=addZeros(userKey,64)
-    state=registerKey
+    registerKey=addZeros(userKey,64) #Si la clave de usuario es menor de 64 bits,
+    state=registerKey                #se rellena con ceros los bits restantes.
     subkeys=list()
     for ronda in range(1,33):
-        state=rotationRight(state,15)
-        state=Sbox(state[-64:-60],4)+state[-60:]
-        rondaCounter=addZeros(bin(ronda),5)
-        xor=int(state[-16:-11],2)^int(rondaCounter,2)
-        state=state[-64:-16]+addZeros(bin(xor),5)+state[-11:]
-        rondaKey=state[-64:-32]
-        subkeys.append(rondaKey)
-    return subkeys
+        state=rotationRight(state,15) #rotación a la derecha 15 bits
+        state=Sbox(state[-64:-60],4)+state[-60:] #Sbox a los 4 bits más a la izquierda
+        rondaCounter=addZeros(bin(ronda),5) #Contador de ronda. Tiene que ser de 5 bits.
+        xor=int(state[-16:-11],2)^int(rondaCounter,2) #operación XOR
+        state=state[-64:-16]+addZeros(bin(xor),5)+state[-11:] #nuevo state
+        rondaKey=state[-64:-32] #Clave de ronda 
+        subkeys.append(rondaKey) #Añade clave a la lista de claves de ronda
+    return subkeys #Devuelve lista de claves
+
+#Algoritmo de generación de rondas MIBS para clave de 80 bits    
 
 def generaterondaKeys2(userKey):
     registerKey=addZeros(userKey,80)
@@ -36,6 +41,8 @@ def generaterondaKeys2(userKey):
         rondaKey=state[-80:-48]
         subkeys.append(rondaKey)
     return subkeys
+
+#Algoritmo MIBS
 
 def MIBS(tamañoclave,key,dataBlock):
     def keyAddition(state,subkey):
@@ -122,7 +129,7 @@ def MIBS(tamañoclave,key,dataBlock):
         right[ronda]=temp
 
     cipherText=left[ronda]+right[ronda]
-    cipherText=hex(int(cipherText,2))[2:]
+    #cipherText=addZeros(hex(int(cipherText,2))[2:]
     return cipherText
 
 #print(MIBS(80,"ffffffffffffffff","ffffffffffffffff"))
