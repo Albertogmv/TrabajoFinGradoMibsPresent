@@ -17,6 +17,14 @@ def addZeros(binario,longi):
             strnumero='0'+strnumero
     return strnumero
 
+def addZerosHex(hexadecimal):
+    strNumero=hexadecimal
+    if(len(strNumero)<16):
+        ceros=16-len(strNumero)
+        for _ in range(0,ceros):
+            strNumero='0'+strNumero
+    return strNumero
+
 
 
 def addZerosBloqueDatos(binario):
@@ -25,3 +33,6 @@ def addZerosBloqueDatos(binario):
         for _ in range(0,ceros):
             binario=binario + str(0)
     return binario
+
+
+print(addZerosHex("abc"))

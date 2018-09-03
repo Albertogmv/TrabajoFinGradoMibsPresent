@@ -105,7 +105,6 @@ def MIBS(tamañoclave,key,dataBlock):
     state = dataBlock  
     #dataBlock = bin(int(dataBlock, 16))
     #dataBlock=addZeros(dataBlock,64)
-
     split = int(len(dataBlock)/2)
     left = [None]*(32+1)
     right= [None]*(32+1)

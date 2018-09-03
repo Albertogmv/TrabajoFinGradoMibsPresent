@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from text_binary import text_to_bits,text_from_bits
-from BitsFunctions1 import addZerosBloqueDatos,addZeros
+from BitsFunctions1 import addZerosBloqueDatos,addZeros,addZerosHex
 from Present1 import PRESENT
 import codecs
 
@@ -36,7 +36,7 @@ def cifradoPRESENT(tamañoclave,key,texto):
         texto_cifrado=""
         for i in datos:
             cifrabloque=PRESENT(tamañoclave,key,datos[i])
-            texto_cifrado=texto_cifrado+cifrabloque
+            texto_cifrado=texto_cifrado+addZerosHex(hex(int(cifrabloque,2))[2:])
         resultado=texto_cifrado
     return resultado
          

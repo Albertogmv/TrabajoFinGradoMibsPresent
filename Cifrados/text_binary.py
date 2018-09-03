@@ -11,3 +11,5 @@ def text_from_bits(bits, encoding='utf-8', errors='surrogatepass'):
 
 
 
+# print(text_to_bits("hola"))
+# print(text_from_bits("01101000011011110110110001100001"))""

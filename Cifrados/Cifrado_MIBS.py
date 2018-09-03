@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from text_binary import text_to_bits,text_from_bits
-from BitsFunctions1 import addZerosBloqueDatos,addZeros
+from BitsFunctions1 import addZerosBloqueDatos,addZeros,addZerosHex
 from MIBS import MIBS
 import codecs
 
@@ -37,7 +37,7 @@ def cifrado(tamañoclave,key,texto):
         for i in datos:
             print(datos[i])
             cifrabloque=MIBS(tamañoclave,key,datos[i])
-            texto_cifrado=texto_cifrado+cifrabloque
+            texto_cifrado=texto_cifrado+addZerosHex(hex(int(cifrabloque,2))[2:])
         resultado=texto_cifrado
     return resultado
          

@@ -12,8 +12,8 @@ def bloqueCifrados(cifrado):
     #cont=1
     for e in cifrado:
         bloque=bloque + e
-        if(len(bloque)==64):
-            bloques[len(bloques)]=bloque
+        if(len(bloque)==16):
+            bloques[len(bloques)]=addZeros(bin(int(bloque,16)),64)
             #if(cont!=len(cifrado)):
             bloque=""
         #cont=cont+1

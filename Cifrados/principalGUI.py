@@ -33,6 +33,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #Cifrado/descifrado MIBS
         self.botoncifra.clicked.connect(self.cifradoMibs)
         self.botondescifra.clicked.connect(self.descifradoMibs)
+ #       self.hexcifr.clicked.connect(self.convierteCifradoHex)
         #MIBS didáctico
         #Paso 1: convertir texto a binario
         self.botonConvertirBin.clicked.connect(self.convierteBinario)
@@ -50,6 +51,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.botonverprocesocifrado.clicked.connect(self.algoritmoMIBS)
         #Paso 6:Anidamos todos los bloques cifrados
         self.botontextocifrado.clicked.connect(self.cifratexto)
+        self.hexadecimal.clicked.connect(self.textoHex)
 
         #Cifrado/descifrado PRESENT
         self.botoncifraPRES.clicked.connect(self.cifradoPresent)
@@ -71,6 +73,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.botonverprocesocifradoPRES.clicked.connect(self.algoritmoPRESENT)
         #Paso 6:Anidamos todos los bloques cifrados
         self.botontextocifradoPRES.clicked.connect(self.cifratextoPRES)
+        self.hexadecimalPres.clicked.connect(self.textoHexPRES)
+
 
     
     #Cifrado/descifrado MIBS
@@ -86,6 +90,13 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             res=cifrado(tamañoClave,textoclave,textoclaro)
         self.textoresultado_2.setText(res)
+        self.statusBar().showMessage("Texto cifrado correctamente.")
+        #self.hexcifr.setEnabled(True)
+    # def convierteCifradoHex(self):
+    #     textobinario=self.textoresultado_2.toPlainText()
+    #     self.textoresultado_2.setText(hex(int(textobinario,2))[2:])
+        
+
 
     def descifradoMibs(self):
         textocifrado=self.textoc.toPlainText()
@@ -99,13 +110,17 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             res=descifrado(tamañoClave,textoclave,textocifrado)
         self.textoresultado_2.setText(res)
+        self.statusBar().showMessage("Texto descifrado correctamente.")
+
 
     #MIBS didáctico
     #Paso 1:
     def convierteBinario(self):
         textoclaro=self.textoclarodidactico.toPlainText()
         bloqueDatos = text_to_bits(textoclaro)
-        self.textobinario.setText(bloqueDatos)    
+        self.textobinario.setText(bloqueDatos)  
+        self.statusBar().clearMessage()
+ 
    
     #Paso 2:
     def bloques64(self):
@@ -251,6 +266,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         clave=claves[self.ui2.ronda.value()-1]
         self.ui2.claveronda.setText(clave)
         self.ui2.botonxor.setEnabled(True)
+        self.ui2.statusbar.showMessage('Bloque inicial dividido correctamente. Comienza la ronda 1.')
+
 
     def adicionClave(self):
         left=self.ui2.left.text()
@@ -259,6 +276,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui2.resultadoxor.setText(addZeros(bin(state),32))
         self.ui2.botonxor.setEnabled(False)
         self.ui2.botonTrozear.setEnabled(True)
+        self.ui2.statusbar.showMessage('Xor realizado con éxito. Nuevo state obtenido.')
+
 
     def trozear(self):
         state=self.ui2.resultadoxor.text()
@@ -282,6 +301,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.ui2.botonTrozear.setEnabled(False)
         self.ui2.botontransformar.setEnabled(True)
+        self.ui2.statusbar.showMessage('state trozeado correctamente. Pulse botón "Transformar por SBox" para actualizar valores.')
+
 
     def transforma(self):
         y1=self.ui2.trozo1.text()
@@ -304,6 +325,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.ui2.botontransformar.setEnabled(False)
         self.ui2.botonmezclar.setEnabled(True)
+        self.ui2.statusbar.showMessage('Pulse el botón "Mezclar" para continuar el algoritmo.')
+
         
     def mezcla(self):
         y1=self.ui2.trozo1.text()
@@ -342,6 +365,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.ui2.botonmezclar.setEnabled(False)
         self.ui2.botonPermutar.setEnabled(True)
+        self.ui2.statusbar.showMessage('Trozos mezclados correctamente. Pulse la pestaña inferior "Algoritmo MIBS (2)" para continuar el Algoritmo.')
+
 
     def permuta(self):
         self.ui2.labely1.setEnabled(True)
@@ -373,6 +398,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.ui2.botonPermutar.setEnabled(False)
         self.ui2.botonxor_2.setEnabled(True)
+        self.ui2.statusbar.showMessage('Trozos permutados correctamente. Salida función F de Feistel obtenida. ')
+
 
     def nuevoleft(self):
         state=self.ui2.salida.text()
@@ -384,6 +411,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui2.righti.setText(self.ui2.leftinicial.text())
         self.ui2.botonxor_2.setEnabled(False)
         self.ui2.botonsiguienteronda.setEnabled(True)
+        self.ui2.statusbar.showMessage('Nuevos bloques de ronda left y right obtenidos correctamente. Pulse "Siguiente Ronda" para comenzar una nueva ronda.')
+
 
     def nuevaRonda(self):
         self.ui2.tabWidget.setCurrentWidget(self.ui2.AlgoritmoMIBS1)
@@ -406,7 +435,11 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         resultado=textocifrado
         self.textofinalcifrado.setText(resultado)
         self.statusBar().showMessage('Texto cifrado correctamente.')    
+        self.hexadecimal.setEnabled(True)
         
+    def textoHex(self):
+        textobinario=self.textofinalcifrado.toPlainText()
+        self.textofinalcifrado.setText(hex(int(textobinario,2))[2:])
 
 #Cifrado de bloques PRESENT
 
@@ -425,6 +458,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             res=cifradoPRESENT(tamañoClave,textoclave,textoclaro)
         self.textoresultadoPRES.setText(res)
+        self.statusBar().showMessage("Texto cifrado correctamente.")
+
 
     def descifradoPresent(self):
         textocifrado=self.textocPRES.toPlainText()
@@ -438,12 +473,16 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             res=descifradoPRESENT(tamañoClave,textoclave,textocifrado)
         self.textoresultadoPRES.setText(res)
+        self.statusBar().showMessage("Texto descifrado correctamente.")
+
 
     #Paso 1
     def convierteBinarioPresent(self):
         textoclaro=self.textoclarodidacticoPRES.toPlainText()
         bloqueDatos = text_to_bits(textoclaro)
-        self.textobinarioPRES.setText(bloqueDatos)    
+        self.textobinarioPRES.setText(bloqueDatos)   
+        self.statusBar().clearMessage()
+
    
     #Paso 2:
     def bloques64Present(self):
@@ -668,6 +707,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.uiPRES.botontransformar.setEnabled(False)
         self.uiPRES.botonPermutar.setEnabled(True)
 
+
+
     def permutaPRESENT(self):
         statei=self.uiPRES.statePaso2_1.text()
         state=list(statei)[::-1]
@@ -722,6 +763,10 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         resultado=textocifrado
         self.textofinalcifradoPRES.setText(resultado)
         self.statusBar().showMessage('Texto cifrado correctamente.')
+        self.hexadecimalPres.setEnabled(True)
+    def textoHexPRES(self):
+        textobinario=self.textofinalcifradoPRES.toPlainText()
+        self.textofinalcifradoPRES.setText(hex(int(textobinario,2))[2:])
 
 
 
