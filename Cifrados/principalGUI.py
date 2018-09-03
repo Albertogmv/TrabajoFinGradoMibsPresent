@@ -89,8 +89,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             res="Error: Introduzca una clave"
         else:
             res=cifrado(tamañoClave,textoclave,textoclaro)
+
         self.textoresultado_2.setText(res)
-        self.statusBar().showMessage("Texto cifrado correctamente.")
         #self.hexcifr.setEnabled(True)
     # def convierteCifradoHex(self):
     #     textobinario=self.textoresultado_2.toPlainText()
@@ -107,14 +107,13 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         textoclave=self.textoclave_2.text()
         if(textoclave==""):
             res="Error: Introduzca una clave"
+
         else:
             try:
                 res=descifrado(tamañoClave,textoclave,textocifrado)
-                self.statusBar().showMessage("Texto descifrado correctamente.")
 
             except:
-                res="El bloque a descifrar no es correcto. Compruebe que este correctamente cifrado por MIBS y en hexadecimal"
-                self.statusBar().showMessage("Error")
+                res="El bloque a descifrar no es correcto. Compruebe que este correctamente cifrado por MIBS."
 
         self.textoresultado_2.setText(res)
 
@@ -228,7 +227,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         bloques=""
         for i in datos:
             cifrabloque=MIBS(64,claveBinario,datos[i])
-            bloques= bloques + "Bloque "+str(i)+": "+cifrabloque+"\n"
+            bloques= bloques + "Bloque "+str(i)+": "+hex(int(cifrabloque,2))[2:]+"\n"
         resultado=bloques
         self.textobloquescifrados.setText(resultado)
         self.statusBar().showMessage('152 bloques cifrados de manera satisfactoria')
@@ -461,10 +460,11 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         textoclave=self.textoclavePRES.text()
         if(textoclave==""):
             res="Error: Introduzca una clave"
+
         else:
             res=cifradoPRESENT(tamañoClave,textoclave,textoclaro)
+
         self.textoresultadoPRES.setText(res)
-        self.statusBar().showMessage("Texto cifrado correctamente.")
 
 
     def descifradoPresent(self):
@@ -479,11 +479,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             try:
                 res=descifradoPRESENT(tamañoClave,textoclave,textocifrado)
-                self.statusBar().showMessage("Texto descifrado correctamente.")
 
             except:
-                res="El bloque a descifrar no es correcto. Compruebe que este correctamente cifrado por PRESENT y en hexadecimal."
-                self.statusBar().showMessage("Error")
+                res="El bloque a descifrar no es correcto. Compruebe que este correctamente cifrado por PRESENT"
 
         self.textoresultadoPRES.setText(res)
 
@@ -599,7 +597,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         bloques=""
         for i in datos:
             cifrabloque=PRESENT(80,claveBinario,datos[i])
-            bloques= bloques + "Bloque "+str(i)+": "+cifrabloque+"\n"
+            bloques= bloques + "Bloque "+str(i)+": "+hex(int(cifrabloque,2))[2:]+"\n"
         resultado=bloques
         self.textobloquescifradosPRES.setText(resultado)
         self.statusBar().showMessage('152 bloques cifrados de manera satisfactoria')
