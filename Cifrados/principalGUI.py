@@ -108,9 +108,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         if(textoclave==""):
             res="Error: Introduzca una clave"
         else:
-            res=descifrado(tamañoClave,textoclave,textocifrado)
+            try:
+                res=descifrado(tamañoClave,textoclave,textocifrado)
+                self.statusBar().showMessage("Texto descifrado correctamente.")
+
+            except:
+                res="El bloque a descifrar no es correcto. Compruebe que este correctamente cifrado por MIBS y en hexadecimal"
+                self.statusBar().showMessage("Error")
+
         self.textoresultado_2.setText(res)
-        self.statusBar().showMessage("Texto descifrado correctamente.")
 
 
     #MIBS didáctico
@@ -471,9 +477,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         if(textoclave==""):
             res="Error: Introduzca una clave"
         else:
-            res=descifradoPRESENT(tamañoClave,textoclave,textocifrado)
+            try:
+                res=descifradoPRESENT(tamañoClave,textoclave,textocifrado)
+                self.statusBar().showMessage("Texto descifrado correctamente.")
+
+            except:
+                res="El bloque a descifrar no es correcto. Compruebe que este correctamente cifrado por PRESENT y en hexadecimal."
+                self.statusBar().showMessage("Error")
+
         self.textoresultadoPRES.setText(res)
-        self.statusBar().showMessage("Texto descifrado correctamente.")
 
 
     #Paso 1
