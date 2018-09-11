@@ -18,7 +18,7 @@ from AlgoritmoPRESENT import Ui_AlgoritmoPRESENT
 
 
 
-qtCreatorFile = "/home/alberto/Escritorio/principaltab.ui" # Nombre del archivo aquí.
+qtCreatorFile = "Cifrados/principaltab.ui" # Nombre del archivo aquí.
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
 
