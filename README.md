@@ -9,7 +9,7 @@ Se ha realizado una Aplicación de Escritorio que permite:
 Ejecución de aplicación:
 
 - Descargar .zip de la carpeta Cifrados.
-- Importar en plataforma software. Por ejemplo en visual studio code..
+- Importar en plataforma software. Por ejemplo, visual studio code.
 - Ejecutar archivo principalGUI.py
 
  
