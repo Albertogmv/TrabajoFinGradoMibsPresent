@@ -603,7 +603,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.statusBar().showMessage('152 bloques cifrados de manera satisfactoria')
 
 
-    #Ver algoritmo cifrado MIBS
     def algoritmoPRESENT(self):
         self.ventanaProcesoPRES=QtWidgets.QMainWindow()
         self.uiPRES=Ui_AlgoritmoPRESENT()
